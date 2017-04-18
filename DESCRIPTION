@@ -1,0 +1,21 @@
+Package: webglobe
+Type: Package
+Title: 3D Interactive Globes for R
+Version: 0.0.1
+Date: 2017-04-18
+Author: Richard Barnes
+Maintainer: Richard Barnes <rbarnes@umn.edu>
+NeedsCompilation: yes
+Depends: R (>= 3.3.3), htmlwidgets (>= 0.8), dplyr (>= 0.5)
+Suggests: knitr,
+    R.sp
+    rmarkdown,
+    testthat
+License: MIT + file LICENCE
+Authors@R: c(person("Richard", "Barnes",    role = c("aut", "cre"), email = "rbarnes@umn.edu")
+Description: Visualizing global data on a flat map can lead to poor interpretations due to projection distortion. This package address this problem by displaying data on an interactive 3D globe in the web browser.
+URL: https://github.com/r-barnes/webglobe/
+BugReports: https://github.com/r-barnes/webglobe/
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr, R.rsp
+SystemRequirements: C++11
