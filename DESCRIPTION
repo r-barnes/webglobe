@@ -6,7 +6,7 @@ Date: 2017-04-18
 Author: Richard Barnes
 Maintainer: Richard Barnes <rbarnes@umn.edu>
 NeedsCompilation: yes
-Depends: R (>= 3.3.3), htmlwidgets (>= 0.7), dplyr (>= 0.5)
+Depends: R (>= 3.3.3), dplyr (>= 0.5)
 Suggests: knitr, R.rsp (>= 0.41.0), rmarkdown (>= 1.0), testthat
 License: MIT + file LICENCE
 Authors@R: c(person("Richard", "Barnes", role = c("aut", "cre"), email = "rbarnes@umn.edu"))

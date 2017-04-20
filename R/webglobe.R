@@ -55,9 +55,11 @@ webglobe <- function(data, width = NULL, height = NULL) {
 
   sizing <- htmlwidgets::sizingPolicy(padding = 0, browser.fill = TRUE)
 
+  fname <- tempfile()
+
   # create widget
-  htmlwidgets::createWidget(
-    name = 'webglobe',
+  htmlwidgets::saveWidget(
+    name         = 'webglobe',
     x,
     width        = width,
     height       = '100%',

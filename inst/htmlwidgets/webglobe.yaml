@@ -1,8 +1,0 @@
-dependencies:
-  - name: Cesium
-    version: 1.15
-    src: htmlwidgets/lib/Cesium-1.15
-    script:
-      - Cesium.js
-    stylesheet:
-      - Widgets/widgets.css
