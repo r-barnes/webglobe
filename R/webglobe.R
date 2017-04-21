@@ -1,3 +1,9 @@
+#' @importFrom geojsonio  geojson_json
+#' @importFrom httpuv     stopDaemonizedServer startDaemonizedServer
+#' @importFrom jsonlite   toJSON fromJSON unbox
+#' @importFrom stats      runif
+#' @importFrom utils      browseURL
+
 content_types <- list(
   js   = "application/javascript",
   html = "text/html",
