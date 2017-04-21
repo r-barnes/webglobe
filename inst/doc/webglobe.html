@@ -75,6 +75,29 @@ wg + wgclear()                    #Clears the above</code></pre>
 <p class="caption">Webglobe states visualization</p>
 </div>
 </div>
+<div id="modes" class="section level1">
+<h1>Modes</h1>
+<p>webglobes have two modes: <strong>immediate</strong> and <strong>not-immediate</strong>. Immediate mode displays a webglobe upon initialization and immediately prints all commands to that globe. Not-immediate mode stores commands and displays them all at once, allowing you to stage visualization without intermediate display. The difference is illustrated below.</p>
+<p><strong>Not-intermediate mode does not yet work!!</strong></p>
+<p>Display timing in intermediate mode:</p>
+<pre><code>library(webglobe)
+data(quakes)                     #Get data
+q   &lt;- quakes                    #Alias data
+wgi &lt;- webglobe(immediate=TRUE)  #Webglobe is displayed now
+Sys.sleep(10)                    #Ensure webglobe runs before continuing
+wgi + wgpoints( q$lat,  q$lon)    #Data displays now!
+wgi + wgpoints(-q$lat, -q$lon)    #Data displays now!</code></pre>
+<p>Display timing in not-intermediate mode:</p>
+<pre><code>library(webglobe)
+data(quakes)                          #Get data
+q   &lt;- quakes                         #Alias data
+wgn &lt;- webglobe(immediate=FALSE)      #Webglobe is not displayed
+Sys.sleep(0)                          #No need to wait
+#Note that we have to store commands
+wgn &lt;- wgn + wgpoints( q$lat,  q$lon) #Nothing shown yet
+wgn &lt;- wgn + wgpoints(-q$lat, -q$lon) #Nothing shown yet
+wgn                                   #Now everything is shown at once!</code></pre>
+</div>
 <div id="roadmap" class="section level1">
 <h1>Roadmap</h1>
 <ul>
