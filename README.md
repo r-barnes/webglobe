@@ -14,7 +14,8 @@ data on either a three-dimensional globe or a flat map.
 
 
 
-##Example: Earth quakes
+Example: Earth quakes
+-----------------------------
 
     library(webglobe)              #Load the library
     data(quakes)                   #Load up some data
@@ -28,7 +29,8 @@ data on either a three-dimensional globe or a flat map.
 
 
 
-##Example: States
+Example: States
+-----------------------------
 
     library(webglobe)                 #Load the library
     m  <- ggplot2::map_data("state")  #Get data
@@ -43,7 +45,8 @@ data on either a three-dimensional globe or a flat map.
 
 
 
-##Installation
+Installation
+-----------------------------
 
 webglobe **hopefully will be** available from CRAN via:
 
@@ -56,7 +59,8 @@ If you want your code to be as up-to-date as possible, you can install it using:
 
 
 
-##Licensing
+Licensing
+-----------------------------
 
 This package uses the following libraries:
 
@@ -69,7 +73,8 @@ file exists for use with CRAN.
 
 
 
-##Roadmap
+Roadmap
+-----------------------------
 
 * Additional graphics primitives
 
@@ -77,7 +82,8 @@ file exists for use with CRAN.
 
 
 
-##Credits
+Credits
+-----------------------------
 
 This R package was developed by Richard Barnes (http://rbarnes.org).
 
