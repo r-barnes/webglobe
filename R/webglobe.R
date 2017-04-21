@@ -175,7 +175,10 @@ webglobe <- function(immediate=FALSE){
     onWSOpen = function(ws) {
       the_env[['ws']]<-ws
       ws$onMessage(function(binary, message) {
-        ws$send('hey')
+        if(message!="sally_forth")
+          return
+        for(m in the_env[['msgs']])
+          ws$send(m)
       })
     },
     env = the_env

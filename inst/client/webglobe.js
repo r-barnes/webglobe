@@ -1,4 +1,25 @@
-//"use strict";
+"use strict";
+
+function getSceneCenter(){
+  var lat = null;
+  var lon = null;
+  var alt = null;
+  if (viewer.scene.mode == 3) {
+    var windowPosition           = new Cesium.Cartesian2(viewer.container.clientWidth / 2, viewer.container.clientHeight / 2);
+    var pickRay                  = viewer.scene.camera.getPickRay(windowPosition);
+    var pickPosition             = viewer.scene.globe.pick(pickRay, viewer.scene);
+    var pickPositionCartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(pickPosition);
+    lon                          = pickPositionCartographic.longitude * (180 / Math.PI);
+    lat                          = pickPositionCartographic.latitude * (180 / Math.PI);
+    alt                          = viewer.camera.getMagnitude();
+  } else if (viewer.scene.mode == 2) {
+    var camPos = viewer.camera.positionCartographic;
+    lat        = camPos.latitude * (180 / Math.PI);
+    lon        = camPos.longitude * (180 / Math.PI);
+    alt        = viewer.camera.getMagnitude();
+  }
+  return [lat, lon, alt];
+};
 
 var imageryViewModels = [];
 
@@ -89,7 +110,7 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
   }
 }));
 
-var options = {
+var viewer_options = {
     animation:                              false,
     fullscreenButton:                       true,
     geocoder:                               false,
@@ -130,7 +151,7 @@ var options = {
     }
 };
 
-var viewer = new Cesium.Viewer('webglobe', options);
+
 
 
 
@@ -208,28 +229,30 @@ var router = {
   },
   cam_center: function(msg){
     if(msg.alt===null)
-      msg.alt = viewer.camera.getMagnitude();
+      msg.alt = viewer.camera.positionCartographic();
     viewer.camera.flyTo({destination:Cesium.Cartesian3.fromDegrees(msg.lon,msg.lat,msg.alt)});
   }
 }
 
-function AddData(msg){
-  thedata = JSON.parse(msg.data);
-  viewer.dataSources.add(Cesium.GeoJsonDataSource.load(thedata), {
-    stroke:       Cesium.Color.HOTPINK,
-    fill:         Cesium.Color.PINK,
-    strokeWidth:  3,
-    markerSymbol: '?'
-  });
-}
+var viewer   = new Cesium.Viewer('webglobe', viewer_options);
+var ws       = new WebSocket("ws://"+window.location.host);
 
-function MessageReceived(msg){
+ws.onmessage = function(msg){
   msg = JSON.parse(msg.data);
   console.log(msg);
   router[msg.command](msg);
 }
 
-var ws = new WebSocket("ws://"+window.location.host);
+ws.onopen = function(e){
+  ws.send('sally_forth');
+};
 
-ws.onmessage = MessageReceived;
-//ws.send('hi');
+var pos_interval_handle = setInterval(function() {
+  var pos = viewer.camera.positionCartographic;
+  var lat = pos['latitude']*180/Math.PI;
+  var lon = pos['longitude']*180/Math.PI;
+  var alt = pos['height']/1000;
+  
+  document.getElementById('currentpos').innerHTML = 
+    lat.toFixed(5) + "&deg;, " + lon.toFixed(5) + "&deg;, " + alt.toFixed(0);
+}, 1000);

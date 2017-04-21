@@ -54,8 +54,6 @@ that globe. Not-immediate mode stores commands and displays them all at once,
 allowing you to stage visualization without intermediate display. The difference
 is illustrated below.
 
-**Not-intermediate mode does not yet work!!**
-
 Display timing in intermediate mode:
 
     library(webglobe)
@@ -65,18 +63,21 @@ Display timing in intermediate mode:
     Sys.sleep(10)                    #Ensure webglobe runs before continuing
     wgi + wgpoints( q$lat,  q$lon)    #Data displays now!
     wgi + wgpoints(-q$lat, -q$lon)    #Data displays now!
+    #Reloading the browser window clears everything
 
 Display timing in not-intermediate mode:
 
     library(webglobe)
-    data(quakes)                          #Get data
-    q   <- quakes                         #Alias data
-    wgn <- webglobe(immediate=FALSE)      #Webglobe is not displayed
-    Sys.sleep(0)                          #No need to wait
+    data(quakes)                                  #Get data
+    q   <- quakes                                 #Alias data
+    wgn <- webglobe(immediate=FALSE)              #Webglobe is not displayed
+    Sys.sleep(0)                                  #No need to wait
     #Note that we have to store commands
-    wgn <- wgn + wgpoints( q$lat,  q$lon) #Nothing shown yet
-    wgn <- wgn + wgpoints(-q$lat, -q$lon) #Nothing shown yet
-    wgn                                   #Now everything is shown at once!
+    wgn <- wgn + wgpoints( q$lat,  q$lon)         #Nothing shown yet
+    wgn <- wgn + wgpoints(-q$lat, -q$lon)         #Nothing shown yet
+    wgn <- wgn + wgcamcenter(2.89,-175.962,21460) #Nothing shown yet
+    wgn                                           #Show it all now!
+    #Reloading the browser window keeps resets to the last persistent point
 
 
 Installation
