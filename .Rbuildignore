@@ -2,5 +2,5 @@ README.md
 LICENSE
 mailinglist
 wintest
-inst/client/tiles/*/4/*
-inst/client/tiles/*/5/*
+^inst/client/tiles/.*?/4/.*
+^inst/client/tiles/.*?/5/.*
