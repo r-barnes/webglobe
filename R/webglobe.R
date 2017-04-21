@@ -64,9 +64,9 @@ wgsendsend <- function(wg,msg){
 #' @return     NA
 #'
 #' @export 
-print <- function(wg, ...){
-  UseMethod("webglobe")
-}
+# print <- function(wg, ...){
+#   UseMethod("webglobe", wg)
+# }
 
 #' @name print.webglobe
 #' 

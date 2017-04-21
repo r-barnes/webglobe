@@ -2,19 +2,39 @@
 % Please edit documentation in R/webglobe.R
 \name{print}
 \alias{print}
+\alias{print.webglobe}
 \title{Display a webglobe}
 \usage{
-print(wg, ...)
+\method{print}{webglobe}(wg, ...)
 }
 \arguments{
 \item{wg}{The webglobe}
 
 \item{...}{Other arguments}
+
+\item{wg}{The webglobe}
+
+\item{...}{Ignored}
 }
 \value{
+NA
+
 NA
 }
 \description{
 Delegates printing to appropriate method
+
+Displays a webglobe. If the webglobe is immediate, then a browser
+            window containing it should already be open; in this case, the
+            webglobe's address is returned. If the webglobe is not immediate
+            then a new browser is open and the cached pipeline is sent to it.
+}
+\examples{
+\dontrun{
+library(webglobe)
+wg<-webglobe()
+wg
+}
+
 }
 
