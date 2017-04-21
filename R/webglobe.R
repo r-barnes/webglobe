@@ -117,7 +117,12 @@ is.webglobe <- function(x) inherits(x, "webglobe")
 #'
 #' @export 
 `+.webglobe` <- function(wg,x){
-  wgsend(wg,x)
+  if(x=="immediate")
+    wg$env[['immediate']] <- TRUE
+  else if (x=="unimmediate")
+    wg$env[['immediate']] <- FALSE
+  else
+    wgsend(wg,x)
   wg
 }
 
@@ -396,4 +401,74 @@ wgpolygondf <- function(df,fill=NA,alpha=1,extrude_height=0,stroke="yellow",stro
     stroke         = jsonlite::unbox(stroke),
     stroke_width   = jsonlite::unbox(stroke_width)
   )))
+}
+
+
+
+#' @name wgimmediate
+#' 
+#' @title      Immediate mode: On
+#'
+#' @description
+#'             Turns on immediate mode
+#' 
+#' @return     A webglobe command
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' wg<-webglobe(immediate=FALSE)
+#' wg + wgimmediate() #wg is now immediate
+#' }
+#'
+#' @export 
+wgimmediate <- function(){
+  "immediate"
+}
+
+#' @name wgunimmediate
+#' 
+#' @title      Immediate mode: Off
+#'
+#' @description
+#'             Turns off immediate mode
+#' 
+#' @return     A webglobe command
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' wg<-webglobe(immediate=TRUE)
+#' wg + wgunimmediate() #wg is now unimmediate
+#' }
+#'
+#' @export 
+wgunimmediate <- function(){
+  "unimmediate"
+}
+
+#' @name wgimmediate_set
+#' 
+#' @title      Immediate mode: Set
+#'
+#' @description
+#'             Set immediate mode by value
+#'
+#' @param mode TRUE or FALSE: TRUE immplies immediate mode on, FALSE implies off
+#' 
+#' @return     A webglobe command
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' wg<-webglobe(immediate=TRUE)
+#' wg + wgimmediate_set(FALSE) #wg is now unimmediate
+#' }
+#'
+#' @export 
+wgimmediate_set <- function(mode){
+  if(mode)
+    "immediate"
+  else
+    "unimmediate"
 }

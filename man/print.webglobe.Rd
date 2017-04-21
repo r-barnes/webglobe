@@ -4,7 +4,7 @@
 \alias{print.webglobe}
 \title{Display a webglobe}
 \usage{
-\method{print}{webglobe}(wg, ...)
+\method{print}{webglobe}(wg)
 }
 \arguments{
 \item{wg}{The webglobe}

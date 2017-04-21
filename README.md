@@ -77,7 +77,24 @@ Display timing in not-intermediate mode:
     wgn <- wgn + wgpoints(-q$lat, -q$lon)         #Nothing shown yet
     wgn <- wgn + wgcamcenter(2.89,-175.962,21460) #Nothing shown yet
     wgn                                           #Show it all now!
-    #Reloading the browser window keeps resets to the last persistent point
+    #Reloading the browser window keeps everything
+
+You can also switch between modes:
+
+    library(webglobe)
+    data(quakes)                                  #Get data
+    q   <- quakes                                 #Alias data
+    wgn <- webglobe(immediate=FALSE)              #Webglobe is not displayed
+    Sys.sleep(0)                                  #No need to wait
+    #Note that we have to store commands
+    wgn <- wgn + wgpoints( q$lat,  q$lon)         #Nothing shown yet
+    wgn <- wgn + wgpoints(-q$lat, -q$lon)         #Nothing shown yet
+    wgn <- wgn + wgcamcenter(2.89,-175.962,21460) #Nothing shown yet
+    wgn + wgimmediate()                           #Make it all immediate
+    wgn
+    wgn + wgpoints(q$lat, -q$lon)                 #This is shown right away
+    #Reloading the browser window keeps everything up to `wgimmediate()`
+
 
 
 Installation
