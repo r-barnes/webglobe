@@ -45,6 +45,40 @@ Example: States
 
 
 
+Modes
+-----------------------------
+
+webglobes have two modes: **immediate** and **not-immediate**. Immediate mode
+displays a webglobe upon initialization and immediately prints all commands to
+that globe. Not-immediate mode stores commands and displays them all at once,
+allowing you to stage visualization without intermediate display. The difference
+is illustrated below.
+
+**Not-intermediate mode does not yet work!!**
+
+Display timing in intermediate mode:
+
+    library(webglobe)
+    data(quakes)                     #Get data
+    q   <- quakes                    #Alias data
+    wgi <- webglobe(immediate=TRUE)  #Webglobe is displayed now
+    Sys.sleep(10)                    #Ensure webglobe runs before continuing
+    wgi + wgpoints( q$lat,  q$lon)    #Data displays now!
+    wgi + wgpoints(-q$lat, -q$lon)    #Data displays now!
+
+Display timing in not-intermediate mode:
+
+    library(webglobe)
+    data(quakes)                          #Get data
+    q   <- quakes                         #Alias data
+    wgn <- webglobe(immediate=FALSE)      #Webglobe is not displayed
+    Sys.sleep(0)                          #No need to wait
+    #Note that we have to store commands
+    wgn <- wgn + wgpoints( q$lat,  q$lon) #Nothing shown yet
+    wgn <- wgn + wgpoints(-q$lat, -q$lon) #Nothing shown yet
+    wgn                                   #Now everything is shown at once!
+
+
 Installation
 -----------------------------
 
@@ -75,6 +109,8 @@ file exists for use with CRAN.
 
 Roadmap
 -----------------------------
+
+* Make not-intermediate mode work
 
 * Additional graphics primitives
 
