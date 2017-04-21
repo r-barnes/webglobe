@@ -19,6 +19,12 @@ wg403 <- list(
   body    = "Forbidden"
 )
 
+wg400 <- list(
+  status  = 400L,
+  headers = list("Content-Type" = "text/plain"),
+  body    = "Bad request"
+)
+
 wgstopbyenv <- function(wgenv){
   httpuv::stopDaemonizedServer(wgenv[['server']])
 }
@@ -39,15 +45,77 @@ wgsendsend <- function(wg,msg){
   })
 }
 
+#' @name print.webglobe
+#' 
+#' @title      Display a webglobe
+#'
+#' @description
+#'             Displays a webglobe. If the webglobe is immediate, then a browser
+#'             window containing it should already be open; in this case, the
+#'             webglobe's address is returned. If the webglobe is not immediate
+#'             then a new browser is open and the cached pipeline is sent to it.
+#' 
+#' @param wg   The webglobe    
+#'
+#' @return     NA
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' wg<-webglobe()
+#' wg
+#' }
+#'
+#' @export 
 print.webglobe <- function(wg){
   if(wg$env[['immediate']])
     print(paste0("Server should be running at 'http://localhost:",wg$env[['port']],"'"))
   else
-    browseURL(paste0('http://localhost:',wg$env[['port']]))
+    utils::browseURL(paste0('http://localhost:',wg$env[['port']]))
+  NA
 }
 
+#' @name is.webglobe
+#' 
+#' @title      Is it a webglobe?
+#'
+#' @description
+#'             Determine if an object is a webglobe
+#' 
+#' @param x    The object that might be a webglobe
+#'
+#' @return     TRUE or FALSE
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' wg<-webglobe(immediate=TRUE)
+#' is.webglobe(wg)
+#' }
+#'
+#' @export 
 is.webglobe <- function(x) inherits(x, "webglobe")
 
+#' @name +.webglobe
+#' 
+#' @title      Send command
+#'
+#' @description
+#'             Send a command to a webglobe
+#' 
+#' @param wg   Webglobe
+#' @param x    Command to send
+#'
+#' @return     The same webglobe
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' wg<-webglobe(immediate=TRUE)
+#' wg + wgclear()
+#' }
+#'
+#' @export 
 `+.webglobe` <- function(wg,x){
   wgsend(wg,x)
   wg
@@ -73,7 +141,7 @@ is.webglobe <- function(x) inherits(x, "webglobe")
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' a<-webglobe(immediate=TRUE)
+#' wg<-webglobe(immediate=TRUE)
 #' }
 #'
 #' @export 
@@ -87,12 +155,14 @@ webglobe <- function(immediate=FALSE){
       path <- req$PATH_INFO
 
       if (is.null(path))
-        return(httpResponse(400, content="<h1>Bad Request</h1>"))
+        return(wg400)
 
       if (path == '/')
         path <- '/index.html'
 
-      path <- paste0(path.package('webglobe'),'inst/client',path)
+      path <- file.path(path.package('webglobe'),'client',path)
+
+      print(path)
 
       ctype <- content_types[[tools::file_ext(path)]]
       if(is.null(ctype))
@@ -107,7 +177,6 @@ webglobe <- function(immediate=FALSE){
     onWSOpen = function(ws) {
       the_env[['ws']]<-ws
       ws$onMessage(function(binary, message) {
-        .lastMessage <<- message
         ws$send('hey')
       })
     },
@@ -119,7 +188,7 @@ webglobe <- function(immediate=FALSE){
 
   startServer <- function(depth){
     tryCatch({
-      app$env[['port']]   <- floor(runif(1,min=4000,max=8000))
+      app$env[['port']]   <- floor(stats::runif(1,min=4000,max=8000))
       app$env[['server']] <- httpuv::startDaemonizedServer("0.0.0.0", app$env[['port']], app)
       TRUE
     }, error = function(e) {
@@ -140,7 +209,7 @@ webglobe <- function(immediate=FALSE){
   reg.finalizer(app$env, wgstopbyenv, onexit = TRUE)
 
   if(immediate)
-  browseURL(paste0('http://localhost:',app$env[['port']]))
+  utils::browseURL(paste0('http://localhost:',app$env[['port']]))
 
   return(app)
 }
@@ -161,7 +230,7 @@ webglobe <- function(immediate=FALSE){
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' a<-webglobe(immediate=TRUE)
+#' wg<-webglobe(immediate=TRUE)
 #' wgport(webglobe)
 #' }
 #'
@@ -177,19 +246,19 @@ wgport <- function(wg){
 #' @description
 #'             Plots latitude-longitude points
 #'
-#' @param lat  One or more latitude values
-#' @param lon  One or more longitude values
-#' @param alt  Altitude of the points, can be single value of vector
-#' @param alt  Colour name of the points, can be single value of vector
-#' @param size Size of the points, can be single value or vector
+#' @param lat    One or more latitude values
+#' @param lon    One or more longitude values
+#' @param alt    Altitude of the points, can be single value of vector
+#' @param colour Colour name of the points, can be single value of vector
+#' @param size   Size of the points, can be single value or vector
 #' 
 #' @return     A webglobe command
 #'
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' a<-webglobe(immediate=TRUE)
-#' a + wgpoints(c(45,20),c(-93,127),alt=3,colour=c("blue","red"))
+#' wg<-webglobe(immediate=TRUE)
+#' wg + wgpoints(c(45,20),c(-93,127),alt=3,colour=c("blue","red"))
 #' }
 #'
 #' @export 
@@ -226,8 +295,8 @@ wgpoints <- function(lat,lon,alt=0,colour="yellow",size=10){
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' a<-webglobe(immediate=TRUE)
-#' a+wgcamhome()
+#' wg<-webglobe(immediate=TRUE)
+#' wg+wgcamhome()
 #' }
 #'
 #' @export 
@@ -249,8 +318,8 @@ wgcamhome <- function(){
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' a<-webglobe(immediate=TRUE)
-#' a+wgclear()
+#' wg<-webglobe(immediate=TRUE)
+#' wg+wgclear()
 #' }
 #'
 #' @export 
@@ -276,8 +345,8 @@ wgclear <- function(){
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' a<-webglobe(immediate=TRUE)
-#' a+wgcamcenter(45,-93,5000)
+#' wg<-webglobe(immediate=TRUE)
+#' wg+wgcamcenter(45,-93,5000)
 #' }
 #'
 #' @export 
@@ -311,15 +380,15 @@ wgcamcenter <- function(lat,lon,alt=NA){
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' a<-webglobe(immediate=TRUE)
-#' a+wgpolygondf(ggplot2::map_data("usa"),fill="blue",extrude_height=1000)
+#' wg<-webglobe(immediate=TRUE)
+#' wg+wgpolygondf(ggplot2::map_data("usa"),fill="blue",extrude_height=1000)
 #' }
 #'
 #' @export 
 wgpolygondf <- function(df,fill=NA,alpha=1,extrude_height=0,stroke="yellow",stroke_width=10){
   toString(jsonlite::toJSON(list(
     command        = jsonlite::unbox("polygons"),
-    polys          = jsonlite::fromJSON(geojsonio::geojson_json(b, group='group', geometry='polygon')),
+    polys          = jsonlite::fromJSON(geojsonio::geojson_json(df, group='group', geometry='polygon')),
     fill           = jsonlite::unbox(fill),
     extrude_height = jsonlite::unbox(extrude_height),
     alpha          = jsonlite::unbox(alpha),

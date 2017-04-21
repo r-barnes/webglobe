@@ -1,4 +1,5 @@
 LICENSE
 mailinglist
 wintest
-
+inst/client/tiles/*/4
+inst/client/tiles/*/5
