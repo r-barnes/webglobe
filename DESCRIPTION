@@ -1,8 +1,8 @@
 Package: webglobe
 Type: Package
 Title: 3D Interactive Globes for R
-Version: 0.0.1
-Date: 2017-04-18
+Version: 0.0.2
+Date: 2017-04-21
 Author: Richard Barnes
 Maintainer: Richard Barnes <rbarnes@umn.edu>
 NeedsCompilation: yes

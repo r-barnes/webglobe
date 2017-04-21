@@ -1,3 +1,12 @@
+webglobe v0.0.2 (Release date: 2017-04-21)
+================
+
+* Added unimmediate mode
+* Added wgbar(), wgimmediate(), wgimmediate_set(), wgunimmediate()
+* Display camera coordinates in viewer
+
+
+
 webglobe v0.0.1 (Release date: 2017-04-20)
 ================
 
