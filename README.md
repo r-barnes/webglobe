@@ -111,6 +111,78 @@ If you want your code to be as up-to-date as possible, you can install it using:
 
 
 
+Developer Notes
+-----------------------------
+
+**How To Add Functionality**
+
+There are really only two files that are import to contributing developers:
+[inst/client/webglobe.js](inst/client/webglobe.js)
+and
+[R/webglobe.R](R/webglobe.R)
+.
+
+The package uses a JSON websocket message passing scheme to communicate data
+between R and the JavaScript client.
+
+Each `wg*()` function generates a JSON payload as follows:
+
+    toString(jsonlite::toJSON(list(
+      command = jsonlite::unbox("COMMAND_NAME"), #Required
+      lat     = lat,                             #Example
+      lon     = lon                              #Example
+    )))
+
+The payload consists of a `command` and accompanying data.
+
+For more complex data, `geojsonio` can be leveraged to conveniently encode the
+data. However, the resulting GeoJSON must be decoded, so that the whole packae
+can be sent with only one level of encoding, as follows:
+
+    toString(jsonlite::toJSON(list(
+      command        = jsonlite::unbox("polygons"),
+      polys          = jsonlite::fromJSON(geojsonio::geojson_json(df, group='group', geometry='polygon'))
+    )))
+
+On the JavaScript side, look for an object named `router`. `router` contains a
+variety of fields which correspond to command names. To add a new command, add a
+field with a corresponding function, such as:
+
+    points: function(msg){
+      var points = viewer.scene.primitives.add(new Cesium.PointPrimitiveCollection());
+      for(var i=0;i<msg.lat.length;i++){
+        points.add({
+          position:  new Cesium.Cartesian3.fromDegrees(msg.lon[i], msg.lat[i], msg.alt[i]),
+          color:     Cesium.Color[msg.colour[i].toUpperCase()],
+          pixelSize: msg.size[i]
+        });
+      }
+    }
+
+Note that it is standard for the package to accept arguments such as `color`,
+`size`, `width`, and so on as having either one value or a number of values
+equal to the number of input points, polygons, or lines. That is: you should be
+able to set the property of the entire group at once or at an individual level.
+
+Note that functions added to [R/webglobe.R](R/webglobe.R) should be accompanied
+by help text an examples, see the existing functions for templates.
+Documentation should then be regenerated using
+
+    roxygen2::roxygenise()
+
+Changes to the vignettes (e.g. [vignettes/webglobe.Rmd](vignettes/webglobe.Rmd))
+can be built using:
+
+    devtools::build_vignettes()
+
+It is polite to ensure that everything's good by using:
+
+    devtools::check()
+
+Once you have added your function, documented it, added any pertinent
+explanations to the vignettes, and checked it, submit a pull request!
+
+
 Licensing
 -----------------------------
 
