@@ -170,7 +170,6 @@ var router = {
           entity.polygon.stroke = Cesium.Color[entity.properties.stroke.toUpperCase()].withAlpha(alpha);
         } else if(msg.stroke){
           entity.polygon.stroke = Cesium.Color[msg.stroke.toUpperCase()].withAlpha(alpha);
-          console.log('here');
         } else {
           entity.polygon.outline = false;
         }
@@ -180,7 +179,6 @@ var router = {
           entity.polygon.strokeWidth = entity.properties.stroke_width;
         } else if(msg.stroke_width){
           entity.polygon.strokeWidth = msg.stroke_width;
-          console.log('and')
         } else {
           entity.polygon.outline = false;
         }
