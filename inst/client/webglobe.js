@@ -224,6 +224,24 @@ var router = {
       });
     }
   },
+  bars: function(msg){
+    for(var i=0;i<msg.lat.length;i++){
+      viewer.entities.add({
+        name:     'bar',
+        polyline: {
+          positions : Cesium.Cartesian3.fromDegreesArrayHeights(
+            [msg.lon[i], msg.lat[i], 0, msg.lon[i], msg.lat[i], msg.alt[i]]
+          ),
+          width:    msg.width[i],
+          material: new Cesium.PolylineOutlineMaterialProperty({
+            color : Cesium.Color[msg.colour[i].toUpperCase()]
+            //outlineWidth : 2,
+            //outlineColor : Cesium.Color.BLACK
+          })
+        }
+      });
+    }
+  },
   cam_reset:  function(msg){
     viewer.camera.flyHome();
   },

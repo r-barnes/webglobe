@@ -405,6 +405,59 @@ wgpolygondf <- function(df,fill=NA,alpha=1,extrude_height=0,stroke="yellow",stro
 
 
 
+#' @name wgbar
+#' 
+#' @title      Plot bars from the surface
+#'
+#' @description
+#'             Plots bars rising upwards from points on the Earth's surface
+#'
+#' @param lat    Latitude of the bars' bases, in degrees
+#' @param lon    Latitude of the bars' bases, in degrees
+#' @param alt    Altitude of the bars' tops, may be one or many values
+#' @param colour Colour of the bars, may be one or many values
+#' @param width  Width of bar bars, may be one or many values
+#' 
+#' @return     A webglobe command
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' data(quakes)                                                      #Load up some data
+#' wg <- webglobe(immediate=FALSE)                                   #Make a webglobe
+#' wg <- wg + wgbar(quakes$lat, quakes$lon, alt=1.5e6*quakes$mag/10) #Plot quakes
+#' wg <- wg + wgcamcenter(-33.35, 142.96, 8000)                      #Move camera
+#' wg
+#' }
+#'
+#' @export 
+wgbar <- function(lat,lon,alt=3000000,colour="blue",width=3){
+  if(length(lat)!=length(lon))
+    stop('Same number of latitude and longitude points are required!')
+  if(length(alt)!=1 && length(alt)!=length(lat))
+    stop('One altitude must be specified, or a number equal to that of latitude/longitude!')
+  if(length(colour)!=1 && length(colour)!=length(lat))
+    stop('One colour must be specified, or a number equal to that of latitude/longitude!')
+  if(length(width)!=1 && length(width)!=length(lat))
+    stop('One width must be specified, or a number equal to that of latitude/longitude!')
+  if(length(alt)==1)
+    alt <- rep(alt, length(lat))
+  if(length(colour)==1)
+    colour <- rep(colour, length(lat))
+  if(length(width)==1)
+    width <- rep(width, length(lat))
+  toString(jsonlite::toJSON(list(
+    command = jsonlite::unbox("bars"),
+    lat     = lat,
+    lon     = lon,
+    alt     = alt,
+    colour  = colour,
+    width   = width
+  )))
+}
+
+
+
 #' @name wgimmediate
 #' 
 #' @title      Immediate mode: On
