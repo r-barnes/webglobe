@@ -162,8 +162,6 @@ webglobe <- function(immediate=FALSE){
 
       path <- file.path(path.package('webglobe'),'client',path)
 
-      print(path)
-
       ctype <- content_types[[tools::file_ext(path)]]
       if(is.null(ctype))
         return(wg403)
