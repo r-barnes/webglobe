@@ -1,0 +1,44 @@
+---
+title:  "webglobe: Interactive 3D Maps"
+author:
+- Richard Barnes
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{webglobe: Interactive 3D Maps}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+#webglobe: Interactive 3D Maps
+
+You want to do understand your data set, but it's spatially distributed and you're afraid that trying to make sense of it on something gross, like a Mercator projection, is going to lead you to bad intuitions.
+
+![Mercator Projection](mercator.png)
+
+(Greenland is nowhere near that big in reality.)
+
+webglobe can help you do this! It allows you to interactively visualize your data on either a three-dimensional globe or a flat map.
+
+#Examples
+
+    library(webglobe)              #Load the library
+    data(quakes)                   #Load up some data
+
+    wg <- webglobe(immediate=TRUE) #Make a webglobe (should open a net browser)
+    wg + wgpoints(quakes$lat, quakes$lon, size=10*quakes$mag)
+
+
+#Roadmap
+
+* Additional graphics primitives
+
+* Submission to CRAN
+
+
+
+#Credits
+
+This R package was developed by Richard Barnes (http://rbarnes.org).
+
+It uses the Cesium WebGL virtual globe and map engine ([link](https://cesiumjs.org/)).
