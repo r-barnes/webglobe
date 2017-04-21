@@ -12,7 +12,7 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
       url:          'tiles/natural_earth/{z}/{x}/{reverseY}.jpg',
       credit:       'TODO',
       minimumLevel: 0,
-      maximumLevel: 5,
+      maximumLevel: 3,
       tileSize:     256
       //bounds: [[-85, -180], [85, 180]],
       //tms:true
@@ -29,7 +29,7 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
       url:          'tiles/stamen_terrain/{z}/{x}/{y}.png',
       credit:       'Stamen Design LLC',
       minimumLevel: 0,
-      maximumLevel: 5,
+      maximumLevel: 3,
       tileSize:     256
     });
   }
@@ -44,7 +44,7 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
       url:          'tiles/stamen_toner/{z}/{x}/{y}.png',
       credit:       'Stamen Design LLC',
       minimumLevel: 0,
-      maximumLevel: 5,
+      maximumLevel: 3,
       tileSize:     256
     });
   }
@@ -59,7 +59,7 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
       url:          'tiles/stamen_watercolor/{z}/{x}/{y}.png',
       credit:       'Stamen Design LLC',
       minimumLevel: 0,
-      maximumLevel: 5,
+      maximumLevel: 3,
       tileSize:     256
     });
   }
