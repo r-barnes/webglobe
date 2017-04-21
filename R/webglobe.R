@@ -51,6 +51,23 @@ wgsendsend <- function(wg,msg){
   })
 }
 
+#' @name print
+#' 
+#' @title      Display a webglobe
+#'
+#' @description
+#'             Delegates printing to appropriate method
+#' 
+#' @param wg   The webglobe  
+#' @param ...  Other arguments  
+#'
+#' @return     NA
+#'
+#' @export 
+print <- function(wg, ...){
+  UseMethod("webglobe")
+}
+
 #' @name print.webglobe
 #' 
 #' @title      Display a webglobe
@@ -61,7 +78,8 @@ wgsendsend <- function(wg,msg){
 #'             webglobe's address is returned. If the webglobe is not immediate
 #'             then a new browser is open and the cached pipeline is sent to it.
 #' 
-#' @param wg   The webglobe    
+#' @param wg   The webglobe   
+#' @param ...  Ignored 
 #'
 #' @return     NA
 #'
@@ -73,7 +91,7 @@ wgsendsend <- function(wg,msg){
 #' }
 #'
 #' @export 
-print.webglobe <- function(wg){
+print.webglobe <- function(wg, ...){
   if(wg$env[['immediate']])
     print(paste0("Server should be running at 'http://localhost:",wg$env[['port']],"'"))
   else

@@ -3,6 +3,7 @@
 S3method("+",webglobe)
 S3method(print,webglobe)
 export(is.webglobe)
+export(print)
 export(webglobe)
 export(wgbar)
 export(wgcamcenter)
