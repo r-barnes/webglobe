@@ -43,6 +43,8 @@ data on either a three-dimensional globe or a flat map.
     wg <- webglobe(immediate=TRUE)    #Make a webglobe (should open a net browser)
     Sys.sleep(10)                     #Wait for browser to start, or it won't work
     wg + wgpolygondf(m,fill="blue",alpha=1,stroke=NA)
+    Sys.sleep(10)                     #Wait, in case you copy-pasted this
+    wg + wgclear()                    #Clears the above
 
 ![Webglobe states visualization](webglobe_states.png)
 
