@@ -176,7 +176,7 @@ var router = {
 
         //TODO
         if(entity.properties.stroke_width){
-          entity.polygon.strokeWidth = entity.properties.stroke_width;
+          entity.polygon.strokeWidth = parseFloat(entity.properties.stroke_width);
         } else if(msg.stroke_width){
           entity.polygon.strokeWidth = msg.stroke_width;
         } else {
@@ -184,7 +184,7 @@ var router = {
         }
 
         if(entity.properties.extrude_height)
-          entity.polygon.extrudedHeight = entity.properties.extrude_height;
+          entity.polygon.extrudedHeight = parseFloat(entity.properties.extrude_height);
         else if(msg.extrude_height)
           entity.polygon.extrudedHeight = msg.extrude_height;
       }
