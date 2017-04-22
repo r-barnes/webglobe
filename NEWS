@@ -1,3 +1,11 @@
+webglobe v0.0.4 (Release date: 2017-04-22)
+================
+
+* Fixed issue with generics printing (but really)
+* Fixed Github-CRAN licensing issue using a `.gitignore` file
+
+
+
 webglobe v0.0.3 (Release date: 2017-04-21)
 ================
 
