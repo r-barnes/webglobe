@@ -40,11 +40,9 @@ data on either a three-dimensional globe or a flat map.
     library(webglobe)                 #Load the library
     m  <- ggplot2::map_data("state")  #Get data
     m$extrude_height <- 1000000*runif(nrow(m),min=0,max=1)
-    wg <- webglobe(immediate=TRUE)    #Make a webglobe (should open a net browser)
-    Sys.sleep(10)                     #Wait for browser to start, or it won't work
-    wg + wgpolygondf(m,fill="blue",alpha=1,stroke=NA)
-    Sys.sleep(10)                     #Wait, in case you copy-pasted this
-    wg + wgclear()                    #Clears the above
+    wg <- webglobe(immediate=FALSE)    #Make a webglobe (should open a net browser)
+    wg <- wg + wgpolygondf(m,fill="blue",alpha=1,stroke=NA)
+    wg
 
 ![Webglobe states visualization](webglobe_states.png)
 
