@@ -1,4 +1,7 @@
-"use strict";
+//"use strict";
+/*jshint browser: true */
+/*global Cesium: false */
+/*global console: false */
 
 function getSceneCenter(){
   var lat = null;
