@@ -263,6 +263,7 @@ wgport <- function(wg){
 #'
 #' @param lat    One or more latitude values
 #' @param lon    One or more longitude values
+#' @param label  Label to put next to point
 #' @param alt    Altitude of the points, can be single value of vector
 #' @param colour Colour name of the points, can be single value of vector
 #' @param size   Size of the points, can be single value or vector
@@ -272,12 +273,14 @@ wgport <- function(wg){
 #' @examples 
 #' \dontrun{
 #' library(webglobe)
-#' wg<-webglobe(immediate=TRUE)
-#' wg + wgpoints(c(45,20),c(-93,127),alt=3,colour=c("blue","red"))
+#' wg <- webglobe(immediate=FALSE)
+#' wg <- wg + wgpoints(c(45,20),c(-93,127),alt=3,colour=c("blue","red"))
+#' wg <- wg + wgpoints(51.5074,-0.1278,label="London",alt=0,colour="blue")
+#' wg
 #' }
 #'
 #' @export 
-wgpoints <- function(lat,lon,alt=0,colour="yellow",size=10){
+wgpoints <- function(lat,lon,label=NA,alt=0,colour="yellow",size=10){
   if(length(lat)!=length(lon))
     stop('Same number of latitude and longitude points are required!')
   if(length(alt)!=1 && length(alt)!=length(lat))
@@ -288,13 +291,16 @@ wgpoints <- function(lat,lon,alt=0,colour="yellow",size=10){
     colour <- rep(colour, length(lat))
   if(length(size)==1)
     size <- rep(size, length(lat))
+  if(length(label)==1)
+    label <- rep(label, length(lat))
   toString(jsonlite::toJSON(list(
     command = jsonlite::unbox("points"),
     lat     = lat,
     lon     = lon,
     alt     = alt,
     colour  = colour,
-    size    = size
+    size    = size,
+    label   = label
   )))
 }
 

@@ -2,6 +2,7 @@ webglobe v? (Release date: ?)
 ================
 
 * Added `wgtitle()`
+* Added `label` to `wgpoints()`
 
 
 

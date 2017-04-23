@@ -4,12 +4,14 @@
 \alias{wgpoints}
 \title{Plot points}
 \usage{
-wgpoints(lat, lon, alt = 0, colour = "yellow", size = 10)
+wgpoints(lat, lon, label = NA, alt = 0, colour = "yellow", size = 10)
 }
 \arguments{
 \item{lat}{One or more latitude values}
 
 \item{lon}{One or more longitude values}
+
+\item{label}{Label to put next to point}
 
 \item{alt}{Altitude of the points, can be single value of vector}
 
@@ -26,9 +28,10 @@ Plots latitude-longitude points
 \examples{
 \dontrun{
 library(webglobe)
-wg<-webglobe(immediate=TRUE)
-wg + wgpoints(c(45,20),c(-93,127),alt=3,colour=c("blue","red"))
+wg <- webglobe(immediate=FALSE)
+wg <- wg + wgpoints(c(45,20),c(-93,127),alt=3,colour=c("blue","red"))
+wg <- wg + wgpoints(51.5074,-0.1278,label="London",alt=0,colour="blue")
+wg
 }
 
 }
-

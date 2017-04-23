@@ -230,13 +230,27 @@ var router = {
     });
   },
   points: function(msg){
-    var points = viewer.scene.primitives.add(new Cesium.PointPrimitiveCollection());
     for(var i=0;i<msg.lat.length;i++){
-      points.add({
-        position:  new Cesium.Cartesian3.fromDegrees(msg.lon[i], msg.lat[i], msg.alt[i]),
-        color:     Cesium.Color[msg.colour[i].toUpperCase()],
-        pixelSize: msg.size[i]
-      });
+      var newpoint = {
+        position: Cesium.Cartesian3.fromDegrees(msg.lon[i], msg.lat[i], msg.alt[i]),
+        point:    {
+          pixelSize: msg.size[i],
+          color:     Cesium.Color[msg.colour[i].toUpperCase()]
+        }
+      };
+
+      if(msg.label[i]){
+        newpoint.label = {
+          text:           msg.label[i],
+          font:           '14pt monospace',
+          style:          Cesium.LabelStyle.FILL_AND_OUTLINE,
+          outlineWidth:   2,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          pixelOffset:    new Cesium.Cartesian2(0, -9)
+        };
+      }
+
+      viewer.entities.add(newpoint);
     }
   },
   bars: function(msg){
