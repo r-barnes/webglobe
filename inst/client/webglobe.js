@@ -193,19 +193,22 @@ var router = {
         if(entity.properties.alpha)
           alpha = entity.properties.alpha;
 
+
         if(entity.properties.fill){
-          entity.polygon.material = Cesium.Color[entity.properties.fill.toUpperCase()].withAlpha(alpha);
+          entity.polygon.material = Cesium.Color.fromCssColorString(entity.properties.fill.valueOf()).withAlpha(alpha);
         } else if(msg.fill){
-          entity.polygon.material = Cesium.Color[msg.fill.toUpperCase()].withAlpha(alpha);
+          entity.polygon.material = Cesium.Color.fromCssColorString(msg.fill).withAlpha(alpha);
         } else {
           entity.polygon.material = Cesium.Color.TRANSPARENT;
         }
 
+        console.log(entity);
+
         //TODO
         if(entity.properties.stroke){
-          entity.polygon.stroke = Cesium.Color[entity.properties.stroke.toUpperCase()].withAlpha(alpha);
+          entity.polygon.stroke = Cesium.Color.fromCssColorString(entity.properties.stroke.valueOf()).withAlpha(alpha);
         } else if(msg.stroke){
-          entity.polygon.stroke = Cesium.Color[msg.stroke.toUpperCase()].withAlpha(alpha);
+          entity.polygon.stroke = Cesium.Color.fromCssColorString(msg.stroke).withAlpha(alpha);
         } else {
           entity.polygon.outline = false;
         }
@@ -226,7 +229,7 @@ var router = {
       }
     }).otherwise(function(error){
       //Display any errrors encountered while loading.
-      window.alert(error);
+      console.error(error);
     });
   },
   points: function(msg){
@@ -235,7 +238,7 @@ var router = {
         position: Cesium.Cartesian3.fromDegrees(msg.lon[i], msg.lat[i], msg.alt[i]),
         point:    {
           pixelSize: msg.size[i],
-          color:     Cesium.Color[msg.colour[i].toUpperCase()]
+          color:     Cesium.Color.fromCssColorString(msg.colour[i])
         }
       };
 
@@ -263,7 +266,7 @@ var router = {
           ),
           width:    msg.width[i],
           material: new Cesium.PolylineOutlineMaterialProperty({
-            color : Cesium.Color[msg.colour[i].toUpperCase()]
+            color : Cesium.Color.fromCssColorString(msg.colour[i])
             //outlineWidth : 2,
             //outlineColor : Cesium.Color.BLACK
           })

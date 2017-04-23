@@ -3,6 +3,8 @@ webglobe v? (Release date: ?)
 
 * Added `wgtitle()`
 * Added `label` to `wgpoints()`
+* Allow hex colours
+* Print error messags to the console, where they are more helpful
 
 
 
