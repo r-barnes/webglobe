@@ -13,6 +13,6 @@ Authors@R: c(person("Richard", "Barnes", role = c("aut", "cre"), email = "rbarne
 Description: Visualizing global data on a flat map can lead to poor interpretations due to projection distortion. This package address this problem by displaying data on an interactive 3D globe in the web browser.
 URL: https://github.com/r-barnes/webglobe/
 BugReports: https://github.com/r-barnes/webglobe/
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr, R.rsp
 SystemRequirements: C++11
