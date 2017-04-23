@@ -67,7 +67,22 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
       url:          'tiles/stamen_toner/{z}/{x}/{y}.png',
       credit:       'Stamen Design LLC',
       minimumLevel: 0,
-      maximumLevel: 3,
+      maximumLevel: 5,
+      tileSize:     256
+    });
+  }
+}));
+
+imageryViewModels.push(new Cesium.ProviderViewModel({
+  name : 'Stamen BW (Offline)',
+  iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/stamenToner.png'),
+  tooltip : 'Toner from Stamen.\nhttps://github.com/stamen/toner-carto',
+  creationFunction : function() {
+    return new Cesium.UrlTemplateImageryProvider({
+      url:          'tiles/stamen_bw/{z}/{x}/{y}.png',
+      credit:       'Stamen Design LLC',
+      minimumLevel: 0,
+      maximumLevel: 5,
       tileSize:     256
     });
   }
