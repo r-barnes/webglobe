@@ -19,15 +19,14 @@ function getSceneCenter(){
     alt        = viewer.camera.getMagnitude();
   }
   return [lat, lon, alt];
-};
+}
 
 var imageryViewModels = [];
 
 imageryViewModels.push(new Cesium.ProviderViewModel({
   name : 'Natural Earth (Offline)',
   iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/naturalEarthII.png'),
-  tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable \
-  map of the world.\nhttp://www.openstreetmap.org TODO',
+  tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org TODO',
   creationFunction : function() {
     return new Cesium.UrlTemplateImageryProvider({
       url:          'tiles/natural_earth/{z}/{x}/{reverseY}.jpg',
@@ -89,8 +88,7 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
 imageryViewModels.push(new Cesium.ProviderViewModel({
   name : 'Open Street Map Offline',
   iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/openStreetMap.png'),
-  tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable \
-  map of the world.\nhttp://www.openstreetmap.org',
+  tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org',
   creationFunction : function() {
     return new Cesium.createOpenStreetMapImageryProvider({
       url : 'tiles/osm'
@@ -101,8 +99,7 @@ imageryViewModels.push(new Cesium.ProviderViewModel({
 imageryViewModels.push(new Cesium.ProviderViewModel({
   name : 'Open\u00adStreet\u00adMap',
   iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/openStreetMap.png'),
-  tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable \
-  map of the world.\nhttp://www.openstreetmap.org',
+  tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org',
   creationFunction : function() {
     return new Cesium.createOpenStreetMapImageryProvider({
       url : '//a.tile.openstreetmap.org/'
@@ -250,7 +247,7 @@ var router = {
       msg.alt = viewer.camera.positionCartographic();
     viewer.camera.flyTo({destination:Cesium.Cartesian3.fromDegrees(msg.lon,msg.lat,msg.alt)});
   }
-}
+};
 
 var viewer   = new Cesium.Viewer('webglobe', viewer_options);
 var ws       = new WebSocket("ws://"+window.location.host);
@@ -259,7 +256,7 @@ ws.onmessage = function(msg){
   msg = JSON.parse(msg.data);
   console.log(msg);
   router[msg.command](msg);
-}
+};
 
 ws.onopen = function(e){
   ws.send('sally_forth');
@@ -267,9 +264,9 @@ ws.onopen = function(e){
 
 var pos_interval_handle = setInterval(function() {
   var pos = viewer.camera.positionCartographic;
-  var lat = pos['latitude']*180/Math.PI;
-  var lon = pos['longitude']*180/Math.PI;
-  var alt = pos['height']/1000;
+  var lat = pos.latitude *180/Math.PI;
+  var lon = pos.longitude*180/Math.PI;
+  var alt = pos.height   /1000;
   
   document.getElementById('currentpos').innerHTML = 
     lat.toFixed(5) + "&deg;, " + lon.toFixed(5) + "&deg;, " + alt.toFixed(0);
