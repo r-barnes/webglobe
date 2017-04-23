@@ -264,6 +264,9 @@ var router = {
     if(msg.alt===null)
       msg.alt = viewer.camera.positionCartographic();
     viewer.camera.flyTo({destination:Cesium.Cartesian3.fromDegrees(msg.lon,msg.lat,msg.alt)});
+  },
+  title: function(msg){
+    document.title = msg.title;
   }
 };
 

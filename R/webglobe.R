@@ -414,6 +414,34 @@ wgpolygondf <- function(df,fill=NA,alpha=1,extrude_height=0,stroke="yellow",stro
 
 
 
+#' @name wgtitle
+#' 
+#' @title      Title of webglobe browser window
+#'
+#' @description
+#'             Changes the tab/window title of the webglobe's browser view
+#'
+#' @param title  The title to use
+#' 
+#' @return     A webglobe command
+#'
+#' @examples 
+#' \dontrun{
+#' library(webglobe)
+#' wg<-webglobe(immediate=TRUE)
+#' wg+wgtitle("I am the new title!")
+#' }
+#'
+#' @export 
+wgtitle <- function(title){
+  toString(jsonlite::toJSON(list(
+    command = jsonlite::unbox("title"),
+    title   = jsonlite::unbox(title)
+  )))
+}
+
+
+
 #' @name wgbar
 #' 
 #' @title      Plot bars from the surface
