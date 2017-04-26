@@ -27,89 +27,14 @@ function getSceneCenter(){
 var imageryViewModels = [];
 
 imageryViewModels.push(new Cesium.ProviderViewModel({
-  name : 'Natural Earth (Offline)',
-  iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/naturalEarthII.png'),
-  tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org TODO',
-  creationFunction : function() {
-    return new Cesium.UrlTemplateImageryProvider({
-      url:          'tiles/natural_earth/{z}/{x}/{reverseY}.jpg',
-      credit:       'TODO',
-      minimumLevel: 0,
-      maximumLevel: 3,
-      tileSize:     256
-      //bounds: [[-85, -180], [85, 180]],
-      //tms:true
-    });
-  }
-}));
-
-imageryViewModels.push(new Cesium.ProviderViewModel({
-  name : 'Stamen Terrain (Offline)',
-  iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/mapboxTerrain.png'),
-  tooltip : 'Terrain from Stamen.\nhttps://github.com/stamen/terrain-classic',
-  creationFunction : function() {
-    return new Cesium.UrlTemplateImageryProvider({
-      url:          'tiles/stamen_terrain/{z}/{x}/{y}.png',
-      credit:       'Stamen Design LLC',
-      minimumLevel: 0,
-      maximumLevel: 3,
-      tileSize:     256
-    });
-  }
-}));
-
-imageryViewModels.push(new Cesium.ProviderViewModel({
-  name : 'Stamen Toner (Offline)',
-  iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/stamenToner.png'),
-  tooltip : 'Toner from Stamen.\nhttps://github.com/stamen/toner-carto',
-  creationFunction : function() {
-    return new Cesium.UrlTemplateImageryProvider({
-      url:          'tiles/stamen_toner/{z}/{x}/{y}.png',
-      credit:       'Stamen Design LLC',
-      minimumLevel: 0,
-      maximumLevel: 5,
-      tileSize:     256
-    });
-  }
-}));
-
-imageryViewModels.push(new Cesium.ProviderViewModel({
-  name : 'Stamen BW (Offline)',
-  iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/stamenToner.png'),
-  tooltip : 'Toner from Stamen.\nhttps://github.com/stamen/toner-carto',
-  creationFunction : function() {
-    return new Cesium.UrlTemplateImageryProvider({
-      url:          'tiles/stamen_bw/{z}/{x}/{y}.png',
-      credit:       'Stamen Design LLC',
-      minimumLevel: 0,
-      maximumLevel: 5,
-      tileSize:     256
-    });
-  }
-}));
-
-imageryViewModels.push(new Cesium.ProviderViewModel({
-  name : 'Stamen Watercolor (Offline)',
-  iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/stamenWatercolor.png'),
-  tooltip : 'Watercolor from Stamen.\nhttp://maps.stamen.com/#watercolor',
-  creationFunction : function() {
-    return new Cesium.UrlTemplateImageryProvider({
-      url:          'tiles/stamen_watercolor/{z}/{x}/{y}.png',
-      credit:       'Stamen Design LLC',
-      minimumLevel: 0,
-      maximumLevel: 3,
-      tileSize:     256
-    });
-  }
-}));
-
-imageryViewModels.push(new Cesium.ProviderViewModel({
   name : 'Open Street Map Offline',
   iconUrl : Cesium.buildModuleUrl('Widgets/Images/ImageryProviders/openStreetMap.png'),
   tooltip : 'OpenStreetMap (OSM) is a collaborative project to create a free editable map of the world.\nhttp://www.openstreetmap.org',
   creationFunction : function() {
     return new Cesium.createOpenStreetMapImageryProvider({
-      url : 'tiles/osm'
+      url : 'tiles/osm',
+      minimumLevel: 0,
+      maximumLevel: 4
     });
   }
 }));
