@@ -20,4 +20,3 @@ wg+wgcamhome()
 }
 
 }
-

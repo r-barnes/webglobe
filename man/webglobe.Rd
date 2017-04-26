@@ -26,4 +26,3 @@ wg<-webglobe(immediate=TRUE)
 }
 
 }
-

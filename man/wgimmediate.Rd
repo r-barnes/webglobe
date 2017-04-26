@@ -20,4 +20,3 @@ wg + wgimmediate() #wg is now immediate
 }
 
 }
-

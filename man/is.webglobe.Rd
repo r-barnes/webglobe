@@ -23,4 +23,3 @@ is.webglobe(wg)
 }
 
 }
-

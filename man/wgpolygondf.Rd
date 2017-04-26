@@ -34,4 +34,3 @@ wg+wgpolygondf(ggplot2::map_data("usa"),fill="blue",extrude_height=1000)
 }
 
 }
-
