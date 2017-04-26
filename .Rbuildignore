@@ -2,5 +2,7 @@ README.md
 LICENSE
 mailinglist
 wintest
-^inst/client/tiles/.*?/4/.*
-^inst/client/tiles/.*?/5/.*
+^inst/client/tiles/osm/5/.*
+^inst/client/tiles/stamen_toner/.*
+^inst/client/tiles/stamen_bw/.*
+^inst/client/tiles/stamen_terrain/.*
