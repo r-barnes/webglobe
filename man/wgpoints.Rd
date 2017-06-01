@@ -13,9 +13,9 @@ wgpoints(lat, lon, label = NA, alt = 0, colour = "yellow", size = 10)
 
 \item{label}{Label to put next to point}
 
-\item{alt}{Altitude of the points, can be single value of vector}
+\item{alt}{Altitude of the points, can be single value or vector}
 
-\item{colour}{Colour name of the points, can be single value of vector}
+\item{colour}{Colour name of the points, can be single value or vector}
 
 \item{size}{Size of the points, can be single value or vector}
 }

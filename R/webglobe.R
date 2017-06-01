@@ -264,8 +264,8 @@ wgport <- function(wg){
 #' @param lat    One or more latitude values
 #' @param lon    One or more longitude values
 #' @param label  Label to put next to point
-#' @param alt    Altitude of the points, can be single value of vector
-#' @param colour Colour name of the points, can be single value of vector
+#' @param alt    Altitude of the points, can be single value or vector
+#' @param colour Colour name of the points, can be single value or vector
 #' @param size   Size of the points, can be single value or vector
 #' 
 #' @return     A webglobe command
