@@ -48,7 +48,7 @@ data on either a three-dimensional globe or a flat map.
 
 #Example: dggridR
 
-[dggridR](https://cran.r-project.org/web/packages/dggridR/index.html) is a package for binning spatial data into equally-sized hexagonal or triangular cells. It makes spatial analysis and statistics easier by solving the problem of having to worry about whether your projection is appropriate for the region you are using: all cells have the same area. It also works well with webglobe!
+[dggridR](https://CRAN.R-project.org/package=dggridR) is a package for binning spatial data into equally-sized hexagonal or triangular cells. It makes spatial analysis and statistics easier by solving the problem of having to worry about whether your projection is appropriate for the region you are using: all cells have the same area. It also works well with webglobe!
 
     library(dggridR)
     library(dplyr)
