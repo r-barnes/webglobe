@@ -4,7 +4,7 @@ Title: 3D Interactive Globes
 Version: 1.0.2
 Date: 2017-06-01
 Maintainer: Richard Barnes <rbarnes@umn.edu>
-NeedsCompilation: yes
+NeedsCompilation: no
 Depends: R (>= 3.4.0), geojsonio (>= 0.3.2), jsonlite (>= 1.4), httpuv (>= 1.3.3)
 Suggests: knitr, R.rsp (>= 0.41.0), rmarkdown (>= 1.0)
 License: MIT + file LICENCE
