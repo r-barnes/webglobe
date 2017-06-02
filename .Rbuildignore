@@ -7,3 +7,4 @@ wintest
 ^inst/client/tiles/stamen_toner/.*
 ^inst/client/tiles/stamen_bw/.*
 ^inst/client/tiles/stamen_terrain/.*
+^misc
