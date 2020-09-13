@@ -1,16 +1,16 @@
 Package: webglobe
 Type: Package
 Title: 3D Interactive Globes
-Version: 1.0.2
-Date: 2017-06-01
-Maintainer: Richard Barnes <rbarnes@umn.edu>
+Version: 1.0.3
+Date: 2020-09-13
+Maintainer: Richard Barnes <rijard.barnes@gmail.com>
 NeedsCompilation: no
 Depends: R (>= 3.4.0), geojsonio (>= 0.3.2), jsonlite (>= 1.4), httpuv (>= 1.3.3)
 Suggests: knitr, R.rsp (>= 0.41.0), rmarkdown (>= 1.0)
 License: MIT + file LICENCE
-Authors@R: c(person("Richard", "Barnes", role = c("aut", "cre"), email = "rbarnes@umn.edu"))
+Authors@R: c(person("Richard", "Barnes", role = c("aut", "cre"), email = "rijard.barnes@gmail.com"))
 Description: Displays geospatial data on an interactive 3D globe in the web browser.
 URL: https://github.com/r-barnes/webglobe/
 BugReports: https://github.com/r-barnes/webglobe/
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr, R.rsp

@@ -152,4 +152,4 @@ You can also switch between modes:
 
 This R package was developed by Richard Barnes (http://rbarnes.org).
 
-It uses the Cesium WebGL virtual globe and map engine ([link](https://cesiumjs.org/)).
+It uses the Cesium WebGL virtual globe and map engine ([link](https://cesium.com/cesiumjs/)).

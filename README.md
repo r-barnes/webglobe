@@ -188,7 +188,7 @@ Licensing
 
 This package uses the following libraries:
 
- * cesiumjs: Cesium is licensed under Apache v2  
+ * cesiumjs: Cesium is licensed under Apache v2
 
 This package, and all code and documentation not otherwise mentioned above
 (essentially anything outside the `src/` directory of this package) are released
@@ -213,4 +213,4 @@ Credits
 
 This R package was developed by Richard Barnes (http://rbarnes.org).
 
-It uses the Cesium WebGL virtual globe and map engine ([link](https://cesiumjs.org/)).
+It uses the Cesium WebGL virtual globe and map engine ([link](https://cesium.com/cesiumjs/)).
