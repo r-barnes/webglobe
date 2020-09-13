@@ -190,7 +190,7 @@ webglobe <- function(immediate=FALSE){
       the_env[['ws']]<-ws
       ws$onMessage(function(binary, message) {
         if(message!="sally_forth")
-          return
+          return(NULL)
         for(m in the_env[['msgs']])
           ws$send(m)
       })
