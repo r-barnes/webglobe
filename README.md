@@ -211,6 +211,6 @@ Roadmap
 Credits
 -----------------------------
 
-This R package was developed by Richard Barnes (http://rbarnes.org).
+This R package was developed by Richard Barnes (https://rbarnes.org/).
 
 It uses the Cesium WebGL virtual globe and map engine ([link](https://cesium.com/cesiumjs/)).
